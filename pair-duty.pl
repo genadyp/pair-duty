@@ -21,9 +21,13 @@ my $date = $ARGV[0]
 
 $date->set_formatter(DateTime::Format::Strptime->new(pattern => '%d-%m-%Y'));
 
+# my @names = qw(
+# anton berko boris genady michael moshe nati igor
+# raphael senya stas yaniv shabtai avi vladimir
+# );
 my @names = qw(
-anton berko boris genady michael moshe nati igor
-raphael senya stas yaniv shabtai avi vladimir
+    leonid genady alex stas boris haim ron
+    misha ariel igal moshe sema avi igor
 );
 
 my @shifted_names = (@names[$#names/2..$#names], @names[0..$#names/2-1]);
@@ -39,10 +43,9 @@ for (0..$#names/2) {
 }
 
 for my $idx (0..$#result) {
-    push @{$result[$idx]}, $date->add(weeks => ($idx ? 1 : 0))->stringify();
-    unshift @{$result[$idx]}, '';
+    unshift @{$result[$idx]}, $date->add(weeks => ($idx ? 1 : 0))->stringify();
 }
-unshift @result, ['toran3', 'toran2', 'toran1', 'date'];
+unshift @result, ['date', 'toran1', 'toran2'];
 dump @result;
 
 generate_xlsx('pair_duty.xlsx', \@result);
